@@ -65,3 +65,30 @@ def decrypt(input_str: str, key: int) -> str:
         index_of_new_char = char_index - key
         output_str += THE_ALPHA_BET[index_of_new_char]
     return output_str.upper()
+
+
+def get_user_input():
+    valid_options = {'e': 'encrypt', 'd': 'decrypt'}
+    select_operation = input('Do you want to (e)ncrypt or (d)ecrypt? \n')
+    if select_operation not in valid_options:
+        print('Invalid selection made. Options are e or d')
+        return
+    encryption_key_str = input('Please enter the key (0 to 26) to use. \n')
+    try:
+        encryption_key = int(encryption_key_str)
+        if encryption_key < 0 or encryption_key > 26:
+            print('Input for key should be (0 to 26). \n')
+            return
+    except ValueError:
+        print('Value input for key is not valid')
+        return
+    input_msg = input(f'Enter the message to {valid_options[select_operation]} \n')
+    if select_operation == 'e':
+        print(encrypt(input_msg, encryption_key))
+        return
+    else:
+        print(decrypt(input_msg, encryption_key))
+        return
+
+
+get_user_input()
