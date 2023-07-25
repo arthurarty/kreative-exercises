@@ -76,19 +76,18 @@ def get_user_input():
     encryption_key_str = input('Please enter the key (0 to 26) to use. \n')
     try:
         encryption_key = int(encryption_key_str)
-        if encryption_key < 0 or encryption_key > 26:
-            print('Input for key should be (0 to 26). \n')
-            return
     except ValueError:
         print('Value input for key is not valid')
+        return
+    if encryption_key < 0 or encryption_key > 26:
+        print('Input for key should be (0 to 26). \n')
         return
     input_msg = input(f'Enter the message to {valid_options[select_operation]} \n')
     if select_operation == 'e':
         print(encrypt(input_msg, encryption_key))
-        return
     else:
         print(decrypt(input_msg, encryption_key))
-        return
+    return
 
 
 get_user_input()

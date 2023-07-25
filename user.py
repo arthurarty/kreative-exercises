@@ -16,7 +16,7 @@ def collect_user_input() -> Optional[Tuple[float, float]]:
     except ValueError:
         print('Values entered must be integers or float')
         return None
-    
+
 user_input = collect_user_input()
 if user_input:
     print(f'Gross Pay: {compute_gross_pay(user_input[0], user_input[1])}')
