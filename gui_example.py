@@ -8,4 +8,14 @@ greeting = tk.Label(
     height=15,
 )
 greeting.pack()
+
+
+button = tk.Button(
+    text="Click here!",
+    width=40,
+    height=15,
+    bg="blue",
+    fg="white",
+)
+button.pack()
 window.mainloop()
