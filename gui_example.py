@@ -9,6 +9,15 @@ def get_weather(api_query: str = 'Kampala,ug'):
     return None
 
 
+border_effects = {
+    "flat": tk.FLAT,
+    "sunken": tk.SUNKEN,
+    "raised": tk.RAISED,
+    "groove": tk.GROOVE,
+    "ridge": tk.RIDGE,
+}
+
+
 window = tk.Tk()
 greeting = tk.Label(
     text='Python rocks!',
@@ -27,4 +36,12 @@ button = tk.Button(
     fg="white",
 )
 button.pack()
+
+
+frame = tk.Frame(master=window, relief=border_effects['sunken'], borderwidth=5)
+frame.pack()
+label_frame = tk.Label(master=frame, text='Flat', width=120)
+label_frame.pack()
+
 window.mainloop()
+
