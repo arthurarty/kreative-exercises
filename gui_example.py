@@ -1,17 +1,12 @@
 import tkinter as tk
-
-
-
 import requests
 
-url = "api.openweathermap.org/data/2.5/weather?q=Kampala,ug&APPID={{key}}"
 
-payload = {}
-headers = {}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
+def get_weather(api_query: str = 'Kampala,ug'):
+    url = f"api.openweathermap.org/data/2.5/weather?q={api_query}&APPID={{key}}"
+    response = requests.request("GET", url, headers={}, data={})
+    print(response.text)
+    return None
 
 
 window = tk.Tk()
