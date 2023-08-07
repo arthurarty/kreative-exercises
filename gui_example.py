@@ -4,7 +4,7 @@ import tkinter as tk
 
 import requests
 
-url = "api.openweathermap.org/data/2.5/weather?q=Kampala,ug&APPID=30c2e7a5d973d68802a5aad774920284&{{key}}={{value}}"
+url = "api.openweathermap.org/data/2.5/weather?q=Kampala,ug&APPID={{key}}"
 
 payload = {}
 headers = {}
