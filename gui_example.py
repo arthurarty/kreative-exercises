@@ -12,29 +12,43 @@ load_dotenv()  # take environment variables from .env.
 OPEN_WEATHER_API_KEY = os.environ.get('OPEN_WEATHER_API_KEY')
 
 
-def get_weather(api_query: str = 'Kampala,ug'):
+def convert_kelvin_to_celsius(kelvin_temp: float):
+    return kelvin_temp - 273.15
+
+
+def get_weather(api_query: str = 'Kampala,ug') -> requests.Response:
     url = f"https://api.openweathermap.org/data/2.5/weather?q={api_query}&APPID={OPEN_WEATHER_API_KEY}"
-    response = requests.request("GET", url, headers={}, data={})
-    print(response.text)
-    return None
+    return requests.request("GET", url, headers={}, data={})
 
 
 def handle_button_click(tk_frame: tk.Frame, event):
-    print('Event received, getting weather now')
-    lbl_weather_output = tk.Label(master=tk_frame, text='The weather is')
+    """
+    Clicking the button triggers an api request to the Open Weather API
+    Picks weather details and creates a new label widget with the details.
+    """
+    weather_resp = get_weather()
+    weather_details = weather_resp.json()
+    city = weather_details.get('name')
+    weather = weather_details.get('weather')[0].get('main')
+    temp = weather_details.get('main').get('temp')
+    lbl_weather_output = tk.Label(
+        master=tk_frame,
+        text=f"City: {city}, weather: {weather}, temp: {temp} Kelvin/ {convert_kelvin_to_celsius(temp):.2f} celsius"
+    )
     lbl_weather_output.pack()
-    return get_weather()
+    return None
 
 
 window = tk.Tk()
+
 frame = tk.Frame(master=window, relief=tk.SUNKEN, borderwidth=5)
 frame.pack()
+
 label_frame = tk.Label(master=frame, text='Weather Application. Click button to get weather', width=120)
 label_frame.pack()
 
 second_frame = tk.Frame(master=window, borderwidth=5)
 second_frame.pack()
-
 
 button = tk.Button(
     master=second_frame,
