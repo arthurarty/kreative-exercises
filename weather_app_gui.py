@@ -3,6 +3,7 @@ import tkinter as tk
 import requests
 from dotenv import load_dotenv
 from functools import partial
+from datetime import datetime
 
 
 # Assumes you have created a .env file with SMTP_USER and SMTP_PASSWORD
@@ -31,6 +32,11 @@ def handle_button_click(tk_frame: tk.Frame, event):
     city = weather_details.get('name')
     weather = weather_details.get('weather')[0].get('main')
     temp = weather_details.get('main').get('temp')
+    lbl_time = tk.Label(
+        master=tk_frame,
+        text=f"Date & Time: {datetime.now()}"
+    )
+    lbl_time.pack()
     lbl_weather_output = tk.Label(
         master=tk_frame,
         text=f"City: {city}, weather: {weather}, temp: {temp} Kelvin/ {convert_kelvin_to_celsius(temp):.2f} celsius"
@@ -49,6 +55,7 @@ label_frame.pack()
 
 second_frame = tk.Frame(master=window, borderwidth=5)
 second_frame.pack()
+
 
 button = tk.Button(
     master=second_frame,
