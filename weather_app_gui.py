@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 from functools import partial
 from datetime import datetime
-# from PIL import ImageTk, Image
+from PIL import ImageTk, Image
 
 
 # Assumes you have created a .env file with SMTP_USER and SMTP_PASSWORD
@@ -51,8 +51,14 @@ window = tk.Tk()
 frame = tk.Frame(master=window, relief=tk.SUNKEN, borderwidth=5)
 frame.pack()
 
-label_frame = tk.Label(master=frame, text='Weather Application. Click button to get weather', width=120)
-label_frame.pack()
+label_frame = tk.Label(master=frame, text='Weather Application. Click button to get current weather', width=60)
+label_frame.pack(side=tk.LEFT)
+
+image = Image.open("storm.png")
+photo = ImageTk.PhotoImage(image)
+label_photo = tk.Label(master=frame, image=photo)
+label_photo.pack(side=tk.LEFT)
+
 
 second_frame = tk.Frame(master=window, borderwidth=5)
 second_frame.pack()
