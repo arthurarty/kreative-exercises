@@ -4,6 +4,7 @@ import requests
 from dotenv import load_dotenv
 from functools import partial
 from datetime import datetime
+# from PIL import ImageTk, Image
 
 
 # Assumes you have created a .env file with SMTP_USER and SMTP_PASSWORD
