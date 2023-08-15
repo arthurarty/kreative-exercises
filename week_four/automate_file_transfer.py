@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
 
 
+#  FTP server details obtained from https://test.rebex.net/
 FTP_HOST = os.getenv('FTP_HOST')
 FTP_PASSWORD = os.getenv('FTP_PASSWORD')
 FTP_USERNAME = os.getenv('FTP_USERNAME')
@@ -22,7 +23,7 @@ def copy_remote_files(host: str, username: str, password: str, src_dir: str, des
     new_files_found = 0
     with ftplib.FTP(host=host, user=username, passwd=password) as ftp:
         status = ftp.getwelcome()
-        if status == '220 Rebex FTP Server ready.':
+        if '220' in status:
             print('Connected successfully')
         else:
             print('Failed to connect to remove server')
