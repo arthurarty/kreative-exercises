@@ -38,13 +38,12 @@ def copy_remote_files(host: str, username: str, password: str, src_dir: str, des
             if os.path.exists(local_filepath):
                 # skip files we already downloaded
                 continue
-            else:
-                try:
-                    with open(local_filepath, 'wb') as local_file:
-                        ftp.retrbinary("RETR " + file_name, local_file.write)
-                    new_files_found += 1
-                except Exception:
-                    print(f'Failed to write file to {local_filepath}')
+            try:
+                with open(local_filepath, 'wb') as local_file:
+                    ftp.retrbinary("RETR " + file_name, local_file.write)
+                new_files_found += 1
+            except Exception:
+                print(f'Failed to write file to {local_filepath}')
         print(f'Done Copying Files. New files found: {new_files_found}')
 
 
